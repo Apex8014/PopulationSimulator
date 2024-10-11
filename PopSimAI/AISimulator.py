@@ -25,14 +25,14 @@ randomAIList = []
 generatedAIList = []
 def generateInitialAI():
     for i in range(184):
-        randomAIList.append(AI([random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000)],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000]))
+        randomAIList.append(AI([random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000)],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000]))
     for i in range(184):
-        generatedAIList.append(AI([random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000)],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000]))
+        generatedAIList.append(AI([random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000)],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000]))
 
 #main
 generateInitialAI()
 #repeats until you chose to end the simulation
-for iterations in range(50):
+for iterations in range(2000):
     for i in range(184):
         #initializes per randomAI
         generations = 1
@@ -48,7 +48,7 @@ for iterations in range(50):
             omnivore.growPopulation()
             predator.growPopulation()
             #Adds to score
-            currentScore += ((plant.population/plant.carryingCapacity)*0.1 + (herbivore.population/herbivore.carryingCapacity) + (omnivore.population/omnivore.carryingCapacity)*10 + (predator.population/predator.carryingCapacity)*100) * generations 
+            currentScore +=  generations * generations * ((plant.population/plant.carryingCapacity) * 0.1 + (herbivore.population/herbivore.carryingCapacity) + (omnivore.population/omnivore.carryingCapacity) * 10 + (predator.population/predator.carryingCapacity) * 100)
             #Prints if a species dies
             randomAIList[i].generations = generations
             if plant.population <= 0:
@@ -87,7 +87,7 @@ for iterations in range(50):
             omnivore.growPopulation()
             predator.growPopulation()
             #Adds to score
-            currentScore += ((plant.population/plant.carryingCapacity)*0.1 + (herbivore.population/herbivore.carryingCapacity) + (omnivore.population/omnivore.carryingCapacity)*10 + (predator.population/predator.carryingCapacity)*100) * generations 
+            currentScore += generations * generations * ((plant.population/plant.carryingCapacity)*0.1 + (herbivore.population/herbivore.carryingCapacity) + (omnivore.population/omnivore.carryingCapacity)*10 + (predator.population/predator.carryingCapacity)*100)
             #Prints if a species dies
             generatedAIList[i].generations = generations
             if plant.population <= 0:
@@ -143,8 +143,9 @@ for iterations in range(50):
                 generatedAIList = allAI[x].regenerate(allAI[y], generatedAIList)
     #adds winning AI to list
     #remakes random AI
-    for i in range(4):
-        generatedAIList[i].score = 0
-    print((iterations+1)/50)
     for i in range(184):
-        randomAIList.append(AI([random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000)],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000],[random.randint(1,1000000000), random.randint(0,20000)/10000, random.randint(1,1000000000),random.randint(0,20000)/10000]))
+        generatedAIList[i].score = 0
+        generatedAIList[i].generations = 0
+    print((iterations+1)/2000)
+    for i in range(184):
+        randomAIList.append(AI([random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000)],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000],[random.randint(1,1000000000), random.randint(1,20000)/10000, random.randint(1,1000000000),random.randint(1,20000)/10000]))
